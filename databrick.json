@@ -1,0 +1,39 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "name": {
+            "type": "string",
+            "defaultValue": "DB1",
+            "metadata": {
+                "description": "This is name of DB"
+            }
+        },
+        "location":{
+            "type": "string",
+            "defaultValue": "resourceGroup().id",
+            "metadata": {
+                "description": "This is location"
+            }
+        }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+            "name": "[parameters('name')]",
+            "type": "Microsoft.DataFactory/factories",
+            "apiVersion": "2017-09-01-preview",
+            "location": "[parameters('location')]",
+            "properties": {
+                "type": "object"
+            }
+        }
+    ],
+    "outputs": {
+        "dataFactoryOutput": {
+            "type": "object",
+            "value": "[reference(resourceId('Microsoft.DataFactory/factories',parameters('name')))]"
+        }
+    }
+}

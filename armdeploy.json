@@ -1,0 +1,34 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "dfName":{
+            "type": "string",
+            "metadata": {
+                "description": "The name of Data Factory A/c"
+            }
+        },
+        "dfLocate":{
+            "type": "string",
+            "metadata": {
+                "description": "The location of Data Factory A/c"
+            }
+        }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+            "name": "[parameters('dfName')]",
+            "type": "Microsoft.DataFactory/factories",
+            "apiVersion": "2017-03-01-preview",
+            "location": "[parameters('dfLocate')]"
+        }
+    ],
+    "outputs": {
+        "dfAccount": {
+            "type": "object",
+            "value": "[reference(resourceId('Microsoft.DataFactory/factories',parameters('dfName')))]"
+        }
+    }
+}
